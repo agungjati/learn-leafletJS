@@ -1,6 +1,30 @@
 (function(){
-    const coordinate = new L.LatLng( 1.0812166, 103.9991899)
-    let mymap = L.map("MyMap").setView( coordinate, 11);
+    const dataSource = [
+        {
+            coordinate : [1.15287, 104.0562544],
+            title : "Komedi putar Ocarina",
+            image : "./images/ocarina/mega-wisata-ocarina-batam.dib"
+        },
+        {
+            coordinate : [1.152256, 104.056712],
+            title : "Tulisan dinding Ocarina",
+            image : "./images/ocarina/Ocarina-Batam-Theme-Park.jpg"
+        },
+        {
+            coordinate : [1.1524658, 104.0563039],
+            title : "Waterpark putar Ocarina",
+            image : "./images/ocarina/Top-100-Waterpark-Batam-640x480.jpg"
+        }
+
+    ]
+
+    const actionOnClickMarker = (data) => {
+        console.log(data)
+    }
+
+
+    const mainCoordinate = new L.LatLng( 1.0812166, 103.9991899)
+    let mymap = L.map("MyMap").setView( mainCoordinate, 11);
     
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     maxZoom: 20,
@@ -10,20 +34,31 @@
     id: 'mapbox.streets'
     }).addTo(mymap);
 
-L.marker([1.15287, 104.0562544]).addTo(mymap)
-.bindPopup(`<center><b>Komedi putar Ocarina</b><br /><br />
-    <img src='./images/ocarina/mega-wisata-ocarina-batam.dib' width='100' /></center>`).openPopup();
+    dataSource.forEach(data => {
+        debugger
+        L.marker(data.coordinate).addTo(mymap)
+        .bindPopup(`<center><b>${data.title}</b><br /><br />
+        <img src='${data.image}' width='100' onClick='actionOnClickMarker' /></center>`).openPopup();
+    })
 
-    L.marker([1.152256, 104.056712]).addTo(mymap)
-.bindPopup(`<center><b>Tulisan dinding Ocarina</b><br /><br />
-    <img src='./images/ocarina/Ocarina-Batam-Theme-Park.jpg' width='100' /></center>`).openPopup();
-
-    L.marker([1.1524658, 104.0563039]).addTo(mymap)
-.bindPopup(`<center><b>Tulisan dinding Ocarina</b><br /><br />
-    <img src='./images/ocarina/Top-100-Waterpark-Batam-640x480.jpg' width='100' /></center>`).openPopup();
-    
 
     setTimeout(() => { mymap.setView( [1.152256, 104.056712], 18);  }, 1500)
+
+// L.marker([1.15287, 104.0562544]).addTo(mymap)
+// .bindPopup(`<center><b>Komedi putar Ocarina</b><br /><br />
+//     <img src='./images/ocarina/mega-wisata-ocarina-batam.dib' width='100' /></center>`).openPopup();
+
+//     L.marker([1.152256, 104.056712]).addTo(mymap)
+// .bindPopup(`<center><b>Tulisan dinding Ocarina</b><br /><br />
+//     <img src='./images/ocarina/Ocarina-Batam-Theme-Park.jpg' width='100' /></center>`).openPopup();
+
+//     L.marker([1.1524658, 104.0563039]).addTo(mymap)
+// .bindPopup(`<center><b>Tulisan dinding Ocarina</b><br /><br />
+//     <img src='./images/ocarina/Top-100-Waterpark-Batam-640x480.jpg' width='100' /></center>`).openPopup();
+    
+// setTimeout(() => { mymap.setView( [1.152256, 104.056712], 18);  }, 1500)
+
+   
 // var popup = L.popup();
 
 // function onMapClick(e) {

@@ -35,7 +35,6 @@
     }).addTo(mymap);
 
     dataSource.forEach(data => {
-        debugger
         L.marker(data.coordinate).addTo(mymap)
         .bindPopup(`<center><b>${data.title}</b><br /><br />
         <img src='${data.image}' width='100' onClick='actionOnClickMarker' /></center>`).openPopup();

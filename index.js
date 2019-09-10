@@ -26,7 +26,7 @@
     const mainCoordinate = new L.LatLng( 1.0812166, 103.9991899)
     let mymap = L.map("MyMap").setView( mainCoordinate, 11);
     
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 20,
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
     '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -69,4 +69,7 @@
 
 // mymap.on('click', onMapClick);
 
+
+    
 })()
+

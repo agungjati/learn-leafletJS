@@ -2,11 +2,16 @@ import React from 'react';
 
 class FormSearch extends React.Component {
     render() {
+        
         return (
-            <div className="d-flex">
-                <input className="form-control" /> &nbsp;
-                <button className="btn btn-primary">Search</button>
-            </div>
+            <form className="d-flex" onSubmit={this.props.onSubmit}>
+                <input 
+                className="form-control" 
+                value={this.props.search} 
+                onChange={this.props.onChange}
+                /> &nbsp;
+                <button type="submit" className="btn btn-primary">Search</button>
+            </form>
         );
     }
 }

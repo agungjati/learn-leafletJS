@@ -1,7 +1,17 @@
 import React from 'react';
-import './FormPost.css'
+import './FormPost.css';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 class FormPost extends React.Component {
+    state = {
+        startDate : new Date()
+    }
+
+    setStartDate = (date) => {
+        this.setState({ startDate : date })
+    }
+
     render() {
         return (
             <div className="shadow-sm p-3 bg-white">
@@ -18,7 +28,10 @@ class FormPost extends React.Component {
                         </div>
                         <div className="d-flex align-items-center justify-content-center mt-2">
                             <label className="px-2 label">Date </label>
-                            <input name="date" type="text" className="form-control" placeholder="Enter date" />
+                            <DatePicker 
+                            className="form-control"
+                            selected={this.state.startDate} 
+                            onChange={this.setStartDate}  />
                         </div>
                         <div className="d-flex align-items-center justify-content-center mt-2">
                             <label className="px-2 label">Time </label>

@@ -31,7 +31,7 @@ class MapPost extends React.Component {
     .then(markers => {
       if(markers.length > 0){
         this.setState({ markers : markers })
-        this.setState({ zoom : 20 })
+        this.setState({ zoom : 15  })
       }
     })
   }

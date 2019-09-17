@@ -6,12 +6,12 @@ import FormPost from './FormPost'
 class Post extends React.Component {
     render() {
         return (
-            <div className="container-fluid mt-3">
+            <div className="container-fluid my-3">
                 <div className="row">
                     <div className="col-md-7 pb-2">
-                        <div className="card border-0 shadow-sm">
+                        
                                 <Map />
-                        </div>
+                        
                     </div>
                     <div className="col-md-5">
                         <FormPost />

@@ -2,15 +2,24 @@ import React from 'react';
 import './FormPost.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import ImageUploader from 'react-images-upload';
 
 class FormPost extends React.Component {
     state = {
-        startDate : new Date()
+        startDate : new Date(),
+        pictures: []
     }
 
     setStartDate = (date) => {
         this.setState({ startDate : date })
     }
+
+    
+	onDrop = (pictureFiles, pictureDataURLs) => {
+		this.setState({
+            pictures: this.state.pictures.concat(pictureFiles),
+        });
+	}
 
     render() {
         return (
@@ -27,20 +36,42 @@ class FormPost extends React.Component {
                             <input name="street" type="text" className="form-control" placeholder="Enter street" />
                         </div>
                         <div className="d-flex align-items-center justify-content-center mt-2">
-                            <label className="px-2 label">Date </label>
-                            <DatePicker 
-                            className="form-control"
-                            selected={this.state.startDate} 
-                            onChange={this.setStartDate}  />
+                            <label className="px-2 label">From </label>
+                            <DatePicker
+                                className="form-control"
+                                selected={this.state.startDate}
+                                onChange={this.setStartDate}
+                                showTimeSelect
+                                timeFormat="HH:mm"
+                                timeIntervals={1}
+                                timeCaption="time"
+                                dateFormat="MMMM d, yyyy HH:mm"
+                                />
                         </div>
                         <div className="d-flex align-items-center justify-content-center mt-2">
-                            <label className="px-2 label">Time </label>
-                            <input name="time" type="time" className="form-control" placeholder="Enter time" />
+                            <label className="px-2 label">To </label>
+                            <DatePicker
+                                className="form-control"
+                                selected={this.state.startDate}
+                                onChange={this.setStartDate}
+                                showTimeSelect
+                                timeFormat="HH:mm"
+                                timeIntervals={1}
+                                timeCaption="time"
+                                dateFormat="MMMM d, yyyy HH:mm"
+                                />
                         </div>
                         <div className="d-flex align-items-center justify-content-center mt-2">
                             <label className="px-2 label">Price </label>
                             <input name="price" type="number" className="form-control" defaultValue="100.000" />
                         </div>
+                        <ImageUploader
+                                withPreview={true}
+                                withIcon={false}
+                                onChange={this.onDrop}
+                                imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                                maxFileSize={5242880}
+                        />
                         <div className="d-flex align-items-center justify-content-end mt-2">
                             <button className="btn btn-primary">Save</button>
                         </div>

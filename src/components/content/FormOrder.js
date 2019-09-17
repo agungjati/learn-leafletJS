@@ -19,7 +19,7 @@ class FormOrder extends React.Component {
                 </div>
                 <div className="d-flex align-items-center justify-content-center mt-2">
                     <label className="px-3 label">Time </label>
-                    <select name="time" className="form-control">
+                    <select name="time" className="custom-select">
                         <option>10:00 - 10:30 (30 minutes)</option>
                         <option>10:00 - 11:30 (1 hours 30 minutes)</option>
                         <option>13:00 - 14:00 (2 hours)</option>

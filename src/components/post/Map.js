@@ -7,7 +7,7 @@ class MapPost extends React.Component {
   state = {
     lat: 1.0812166,
     lon: 103.9991899,
-    zoom: 13,
+    zoom: 12,
     attribution: `&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors`,
     map: `https://{s}.tile.osm.org/{z}/{x}/{y}.png`,
     search : "",
@@ -43,6 +43,7 @@ class MapPost extends React.Component {
       const center =  [marker.lat, marker.lon]
     
     return (
+      <div className="card border-0 shadow-sm">
       <div className="card-body">
         <FormSearch 
         search={this.state.search}
@@ -57,7 +58,7 @@ class MapPost extends React.Component {
           />
           {
             this.state.markers.map(({ display_name, lat, lon } , idx) => (
-              <Marker position={[lat, lon]} key={idx}>
+              <Marker position={[lat, lon]} key={idx} >
                 <Popup >
                   {display_name}
                 </Popup>
@@ -67,6 +68,7 @@ class MapPost extends React.Component {
 
         </Map>
       </div>
+      </div>  
     );
   }
 }

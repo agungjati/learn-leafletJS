@@ -1,37 +1,79 @@
 import React from 'react';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
+import FormSearch from './FormSearch'
 
 class MapContent extends React.Component {
 
-    state = {
-        lat: 51.505,
-        lng: -0.09,
-        zoom: 13,
-        attribution : `&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors`,
-        map : `https://{s}.tile.osm.org/{z}/{x}/{y}.png`
-    }
+  state = {
+    lat: 1.0812166,
+    lon: 103.9991899,
+    zoom: 12,
+    attribution: `&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors`,
+    map: `https://{s}.tile.osm.org/{z}/{x}/{y}.png`,
+    search : "",
+    markers: [
+      {
+        display_name: "Batam",
+        lat: 1.0812166,
+        lon: 103.9991899
+      }
+    ]
+  }
+
+  onHandleChangeSearch = (e) => {
+    this.setState({ search : e.target.value })
+  }
+
+  onHandleSearching = (ev) => {
+    ev.preventDefault()
     
-  
-    render() {
-      const position = [this.state.lat, this.state.lng];
-      return (
-        <div className="card border-0 shadow-sm">
-        <div className="card-body">
-        <Map center={position} zoom={this.state.zoom}>
+    // getLocationsBySearch(this.state.search)
+    // .then(markers => {
+    //   if(markers.length > 0){
+    //     this.setState({ markers : markers })
+    //     this.setState({ zoom : 15  })
+    //   }
+    // })
+  }
+
+  onClickMarker = (marker) => {
+    console.log(marker)
+  }
+
+  render() {
+    
+      const marker = this.state.markers[0];
+      const center =  [marker.lat, marker.lon]
+    
+    return (
+      <div className="card border-0 shadow-sm">
+      <div className="card-body">
+        <FormSearch 
+        search={this.state.search}
+        onChange={this.onHandleChangeSearch}
+        onSubmit={this.onHandleSearching}/>
+
+        <hr />
+        <Map center={center} zoom={this.state.zoom}>
           <TileLayer
             attribution={this.state.attribution}
             url={this.state.map}
           />
-          <Marker position={position}>
-            <Popup >
-              A pretty CSS3 popup. <br/> Easily customizable.
-            </Popup>
-          </Marker>
+          {
+            this.state.markers.map(({ display_name, lat, lon } , idx) => (
+              <Marker position={[lat, lon]} key={idx} onClick={this.onClickMarker}>
+                <Popup >
+                  {display_name}
+                </Popup>
+              </Marker>
+            ))
+          }
+
         </Map>
-        </div>
-        </div>
-      );
-    }
+      </div>
+      </div>
+    );
   }
-  
+}
+
 export default MapContent;
